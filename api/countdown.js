@@ -9,12 +9,25 @@ export default function handler(req, res) {
       <head>
         <meta charset="utf-8"/>
         <style>
-          body { font-family: sans-serif; color:#222; text-align:center; margin-top:40px; }
-          .countdown { font-size: 22px; }
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #222;
+            text-align: center;
+            margin-top: 40px;
+          }
+          .card {
+            display: inline-block;
+            background: white;
+            padding: 25px 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            font-size: 22px;
+          }
         </style>
       </head>
       <body>
-        <div class="countdown">📅 <b>Baltic Touriin on enää ${diffDays} päivää!</b></div>
+        <div class="card">📅 <b>Baltic Touriin on enää ${diffDays} päivää!</b></div>
       </body>
     </html>
   `);

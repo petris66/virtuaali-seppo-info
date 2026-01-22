@@ -32,8 +32,8 @@ export default async function handler(req, res) {
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
               font-size: 22px;
               opacity: 0;
-              animation: fadeInBounce 1.4s ease forwards;
-              animation-fill-mode: forwards; /* 🔧 Tämä korjaa katoamisen */
+              animation: fadeInBounce 1.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+              animation-fill-mode: forwards;
               transition: transform 0.25s ease, box-shadow 0.25s ease;
             }
             .card:hover {

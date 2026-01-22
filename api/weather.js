@@ -11,6 +11,12 @@ export default async function handler(req, res) {
     const weather = data.weather[0].description;
     const icon = data.weather[0].icon;
 
+    // Luodaan Suomen aikaa oleva aikaleima
+    const now = new Date();
+    const finnishTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Helsinki" }));
+    const dateStr = finnishTime.toLocaleDateString("fi-FI");
+    const timeStr = finnishTime.toLocaleTimeString("fi-FI", { hour: "2-digit", minute: "2-digit" });
+
     res.status(200).send(`
       <html>
         <head>
@@ -26,7 +32,7 @@ export default async function handler(req, res) {
             .card {
               display: inline-block;
               background: #ffffff;
-              padding: 25px 45px;
+              padding: 25px 45px 15px 45px;
               border-radius: 12px;
               border: 2px solid #e3e6eb;
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -39,6 +45,11 @@ export default async function handler(req, res) {
             .card:hover {
               transform: translateY(-3px);
               box-shadow: 0 6px 16px rgba(0, 102, 255, 0.25);
+            }
+            .timestamp {
+              font-size: 14px;
+              color: #555;
+              margin-top: 10px;
             }
             @keyframes fadeInBounce {
               0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
@@ -67,6 +78,7 @@ export default async function handler(req, res) {
           <div class="card">
             🌤️ <b>Riiassa tänään:</b> ${weather}, ${temp}°C
             <img src="https://openweathermap.org/img/wn/${icon}.png" />
+            <div class="timestamp">Päivitetty: ${dateStr} klo ${timeStr}</div>
           </div>
         </body>
       </html>

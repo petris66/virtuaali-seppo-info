@@ -31,10 +31,16 @@ export default async function handler(req, res) {
               border: 2px solid #e3e6eb;
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
               font-size: 22px;
-              transition: transform 0.2s ease;
+              transition: transform 0.2s ease, opacity 0.8s ease;
+              opacity: 0;
+              animation: fadeIn 1.2s ease forwards;
             }
             .card:hover {
               transform: translateY(-3px);
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(10px); }
+              to { opacity: 1; transform: translateY(0); }
             }
             img {
               vertical-align: middle;

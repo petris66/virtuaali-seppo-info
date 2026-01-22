@@ -11,18 +11,23 @@ export default function handler(req, res) {
         <style>
           body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            background-color: #f5f7fa;
             color: #222;
             text-align: center;
-            margin-top: 40px;
+            margin-top: 60px;
           }
           .card {
             display: inline-block;
-            background: white;
-            padding: 25px 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            background: #ffffff;
+            padding: 25px 45px;
+            border-radius: 12px;
+            border: 2px solid #e3e6eb;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             font-size: 22px;
+            transition: transform 0.2s ease;
+          }
+          .card:hover {
+            transform: translateY(-3px);
           }
         </style>
       </head>

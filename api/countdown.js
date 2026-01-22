@@ -4,6 +4,12 @@ export default function handler(req, res) {
   const diffTime = targetDate - today;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+  // Luodaan aikaleima Suomen ajassa
+  const now = new Date();
+  const finnishTime = new Date(now.toLocaleString("en-US", { timeZone: "Europe/Helsinki" }));
+  const dateStr = finnishTime.toLocaleDateString("fi-FI");
+  const timeStr = finnishTime.toLocaleTimeString("fi-FI", { hour: "2-digit", minute: "2-digit" });
+
   res.status(200).send(`
     <html>
       <head>
@@ -19,7 +25,7 @@ export default function handler(req, res) {
           .card {
             display: inline-block;
             background: #ffffff;
-            padding: 25px 45px;
+            padding: 25px 45px 15px 45px;
             border-radius: 12px;
             border: 2px solid #e3e6eb;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -32,6 +38,11 @@ export default function handler(req, res) {
           .card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0, 102, 255, 0.25);
+          }
+          .timestamp {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
           }
           @keyframes fadeInBounce {
             0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
@@ -53,7 +64,10 @@ export default function handler(req, res) {
         </script>
       </head>
       <body>
-        <div class="card">📅 <b>Baltic Touriin on enää ${diffDays} päivää!</b></div>
+        <div class="card">
+          📅 <b>Baltic Touriin on enää ${diffDays} päivää!</b>
+          <div class="timestamp">Päivitetty: ${dateStr} klo ${timeStr}</div>
+        </div>
       </body>
     </html>
   `);

@@ -1,14 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "countdown.html", "use": "@vercel/static" },
-    { "src": "weather.html", "use": "@vercel/static" }
+    { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/countdown", "dest": "/countdown.html" },
     { "src": "/weather", "dest": "/weather.html" },
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/.*", "status": 404, "dest": "/index.html" }
+    { "src": "/", "dest": "/index.html" }
   ]
 }

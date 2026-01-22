@@ -23,18 +23,20 @@ export default function handler(req, res) {
             transition: background-color 0.6s ease;
           }
           .card {
-            display: inline-block;
-            background: #ffffff;
-            padding: 25px 45px 15px 45px;
-            border-radius: 12px;
-            border: 2px solid #e3e6eb;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 22px;
-            opacity: 0;
-            animation: fadeInBounce 1.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-            animation-fill-mode: forwards;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-          }
+  display: inline-block;
+  background: #ffffff;
+  padding: 18px 32px 10px 32px; /* pienempi laatikko */
+  border-radius: 10px;
+  border: 2px solid #e3e6eb;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 20px;
+  opacity: 0;
+  animation: fadeInBounce 1.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  animation-fill-mode: forwards;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
           .card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 16px rgba(0, 102, 255, 0.25);

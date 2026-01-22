@@ -31,18 +31,19 @@ export default async function handler(req, res) {
               border: 2px solid #e3e6eb;
               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
               font-size: 22px;
-              transition: all 0.4s ease, opacity 0.8s ease;
               opacity: 0;
-              animation: fadeIn 1.2s ease forwards;
+              animation: fadeInBounce 1.4s ease forwards;
+              transition: transform 0.25s ease, box-shadow 0.25s ease;
             }
             .card:hover {
-              transform: translateY(-4px);
-              box-shadow: 0 6px 18px rgba(0, 80, 255, 0.25);
-              border-color: #b3ccff;
+              transform: translateY(-3px);
+              box-shadow: 0 6px 16px rgba(0, 102, 255, 0.25);
             }
-            @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(10px); }
-              to { opacity: 1; transform: translateY(0); }
+            @keyframes fadeInBounce {
+              0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
+              60%  { opacity: 1; transform: translateY(-6px) scale(1.02); }
+              80%  { transform: translateY(2px) scale(1); }
+              100% { transform: translateY(0) scale(1); }
             }
             img {
               vertical-align: middle;

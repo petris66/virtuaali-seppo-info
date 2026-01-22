@@ -26,6 +26,7 @@ export default function handler(req, res) {
             font-size: 22px;
             opacity: 0;
             animation: fadeInBounce 1.4s ease forwards;
+            animation-fill-mode: forwards; /* 🔧 Pitää kortin näkyvissä */
             transition: transform 0.25s ease, box-shadow 0.25s ease;
           }
           .card:hover {
@@ -36,7 +37,7 @@ export default function handler(req, res) {
             0%   { opacity: 0; transform: translateY(20px) scale(0.98); }
             60%  { opacity: 1; transform: translateY(-6px) scale(1.02); }
             80%  { transform: translateY(2px) scale(1); }
-            100% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
           }
         </style>
         <script>

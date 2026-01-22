@@ -18,10 +18,10 @@ export default async function handler(req, res) {
           <style>
             body {
               font-family: Arial, sans-serif;
-              background-color: #f5f7fa;
               color: #222;
               text-align: center;
               margin-top: 60px;
+              transition: background-color 0.6s ease;
             }
             .card {
               display: inline-block;
@@ -41,6 +41,17 @@ export default async function handler(req, res) {
               margin-left: 8px;
             }
           </style>
+          <script>
+            const hour = new Date().getHours();
+            let bg;
+            if (hour >= 6 && hour < 12) bg = '#fff5e6';        // aamu
+            else if (hour >= 12 && hour < 18) bg = '#f5f7fa';  // päivä
+            else if (hour >= 18 && hour < 22) bg = '#e8f0ff';  // ilta
+            else bg = '#f0f0f5';                               // yö
+            document.addEventListener('DOMContentLoaded', () => {
+              document.body.style.backgroundColor = bg;
+            });
+          </script>
         </head>
         <body>
           <div class="card">

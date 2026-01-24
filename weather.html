@@ -1,70 +1,101 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Sää Riiassa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
-      text-align: center;
-      padding: 40px;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f4f6f8;
       color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
-    h1 {
-      color: #0033A0;
-    }
+
     .card {
-      background: white;
-      display: inline-block;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 32px 24px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: #0b5ed7;
+      font-size: 1.5rem;
+    }
+
+    #weather {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 16px 0;
+    }
+
+    #updated {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .footer {
       margin-top: 20px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    a {
-      color: #F47A20;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    p.updated {
-      font-size: 12px;
-      color: #777;
-      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <h1>🌤️ Sää Riiassa</h1>
 
   <div class="card">
-    <h2 id="weather">Ladataan säätietoja...</h2>
-    <p class="updated">Päivitetty: 22.1.2026 klo 21.15</p>
+    <h1>🌤️ Sää Riiassa</h1>
+    <div id="weather">Ladataan säätietoja...</div>
+    <div id="updated"></div>
+    <div class="footer">Lähde: Open-Meteo · Aika: Riika (EET / EEST)</div>
   </div>
 
-  <p style="margin-top: 20px;">
-    <a href="index.html">← Takaisin etusivulle</a>
-  </p>
-
   <script>
-    async function fetchWeather() {
+    async function updateWeather() {
       try {
-        const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.10&current=temperature_2m,weather_code&timezone=auto");
+        const response = await fetch(
+          "https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.10&current=temperature_2m,weather_code&timezone=Europe/Riga"
+        );
+
         const data = await response.json();
         const temp = data.current.temperature_2m;
-        document.getElementById("weather").textContent = `Riiassa on nyt ${temp}°C`;
+
+        document.getElementById("weather").innerText =
+          `Riiassa on nyt ${temp}°C`;
+
+        const now = new Date();
+        const dateStr = now.toLocaleDateString("fi-FI");
+        const timeStr = now.toLocaleTimeString("fi-FI", {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        document.getElementById("updated").innerText =
+          `Päivitetty: ${dateStr} klo ${timeStr}`;
       } catch (e) {
-        document.getElementById("weather").textContent = "Säätietoja ei saatu ladattua.";
+        document.getElementById("weather").innerText =
+          "Säätietoja ei saatu ladattua.";
       }
     }
-    fetchWeather();
+
+    // Päivitä heti
+    updateWeather();
+
+    // Päivitä automaattisesti 5 minuutin välein
+    setInterval(updateWeather, 300000);
   </script>
+
 </body>
 </html>
